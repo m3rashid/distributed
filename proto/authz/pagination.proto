@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "./generated/authz";
+
+message PaginationRequest {
+	uint32 page = 1;
+	uint32 limit = 2;
+}
+
+message PaginationResponse {
+	uint32 total = 1;
+	uint32 page = 2;
+	uint32 limit = 3;
+	uint32 nextPage = 4;
+	uint32 prevPage = 5;
+}
+
+message Message {
+	string message = 1;
+}
+
+message ID {
+	uint32 id = 1;
+}
+
+message NoParam {}

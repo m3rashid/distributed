@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "proto/authz/pagination.proto";
+
+option go_package = "./generated/authz";
+
+message CreateGroupRequest {
+	string name = 1;
+}
+
+message Group {
+	string name = 1;
+	uint32 id = 2;
+}
+
+message GroupPaginationResponse {
+	PaginationResponse meta = 1;
+	Group data = 2;
+}
+
+service GroupService {
+	rpc DeleteGroup (ID) returns (Message) {}
+	rpc CreateGroup (CreateGroupRequest) returns (Group) {}
+	rpc GetAllGroups (PaginationRequest) returns (GroupPaginationResponse) {}
+}

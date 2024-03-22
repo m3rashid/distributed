@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "./generated/authz";
+
+import "proto/authz/pagination.proto";
+
+message CreatePermissionRequest {
+	uint32 resource_id = 2;
+	optional uint32 resource_parent_id = 3;
+	uint32 relation = 4;
+	uint32 user_id = 5;
+	optional uint32 group_id = 6;
+}
+
+message Permission {
+	uint32 id = 1;
+	uint32 resource_id = 2;
+	uint32 resource_parent_id = 3;
+	uint32 relation = 4;
+	uint32 user_id = 5;
+	uint32 group_id = 6;
+}
+
+message CheckPermissionResponse {
+	bool res = 1;
+}
+
+service PermissionService {
+	rpc DeletePermission (ID) returns (Message) {}
+	rpc CreatePermission (CreatePermissionRequest) returns (Permission) {}
+	rpc CheckPermission (CreatePermissionRequest) returns (CheckPermissionResponse) {}
+}
