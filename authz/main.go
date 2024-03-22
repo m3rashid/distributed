@@ -1,9 +1,7 @@
 package main
 
 import (
-	"authz/models"
 	"authz/service"
-	"authz/utils"
 	"fmt"
 	"log"
 	"net"
@@ -20,8 +18,8 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	db := utils.GetDB()
-	db.AutoMigrate(&models.Group{}, &models.Permission{})
+	// db := utils.GetDB()
+	// db.AutoMigrate(&models.Group{}, &models.Permission{})
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
 	if err != nil {

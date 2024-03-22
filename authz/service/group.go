@@ -6,7 +6,9 @@ import (
 	"proto/generated/authz"
 )
 
-type GroupServer struct{}
+type GroupServer struct {
+	authz.UnimplementedGroupServiceServer
+}
 
 func (s *GroupServer) DeleteGroup(
 	ctx context.Context,
@@ -21,6 +23,7 @@ func (s *GroupServer) CreateGroup(
 	msg *authz.CreateGroupRequest,
 ) (*authz.Group, error) {
 	fmt.Println("CreateGroup received: ", msg)
+	fmt.Println(msg.Name)
 	return nil, nil
 }
 

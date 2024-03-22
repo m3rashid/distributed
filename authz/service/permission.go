@@ -6,7 +6,9 @@ import (
 	"proto/generated/authz"
 )
 
-type PermissionServer struct{}
+type PermissionServer struct {
+	authz.UnimplementedPermissionServiceServer
+}
 
 func (s *PermissionServer) DeletePermission(
 	ctx context.Context,
