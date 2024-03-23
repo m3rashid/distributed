@@ -8,7 +8,7 @@ remove-gen-proto:
 	rm -rf proto/generated/authz
 
 gen-types:
-	cd conversions && go run main.go
+	cd types && go run main.go
 
 remove-gen-types:
 	cd types && \

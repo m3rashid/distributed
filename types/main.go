@@ -30,11 +30,11 @@ func newStructConverter(fileName string, models ...interface{}) (string, *typesc
 		WithConstructor(true).
 		WithInterface(true).
 		WithIndent("  "). // Two spaces
-		WithBackupDir("../types/backup")
+		WithBackupDir("backup")
 
 	for _, model := range models {
 		converter.Add(model)
 	}
 
-	return fmt.Sprintf("../types/generated/%s", fileName), converter
+	return fmt.Sprintf("generated/%s", fileName), converter
 }
