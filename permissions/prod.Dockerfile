@@ -8,10 +8,10 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /bin/authz ./main.go
+RUN go build -o /bin/permissions ./main.go
 
 
 # Production image
 FROM scratch
-COPY --from=builder /bin/authz /bin/authz
-CMD ["/bin/authz"]
+COPY --from=builder /bin/permissions /bin/permissions
+CMD ["/bin/permissions"]

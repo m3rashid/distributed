@@ -1,8 +1,8 @@
-name: authz
+name: permissions
 
 networks:
   default:
-    name: authz
+    name: permissions
 
 services:
   webserver:
@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_USER: genos
       POSTGRES_PASSWORD: genos
-      POSTGRES_DB: authz
+      POSTGRES_DB: permissions
     ports:
       - 5432:5432
     volumes:
