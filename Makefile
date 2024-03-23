@@ -6,3 +6,19 @@ gen-proto:
 
 remove-gen-proto:
 	rm -rf proto/generated/authz
+
+gen-types:
+	cd conversions && go run main.go
+
+remove-gen-types:
+	cd types && \
+	rm -rf generated && \
+	mkdir generated && \
+	cd generated && \
+	touch .gitkeep && \
+	cd .. && \
+	rm -rf backup && \
+	mkdir backup && \
+	cd backup && \
+	touch .gitkeep && \
+	cd -
