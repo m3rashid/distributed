@@ -1,21 +1,21 @@
-name: permissions
+name: distributed
 
 networks:
   default:
-    name: permissions
+    name: distributed
 
 services:
-  webserver:
+  permissions:
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      dockerfile: permissions/dev.Dockerfile
     restart: always
     env_file:
-      - .env
+      - permissions/.env
     volumes:
-      - .:/app
+      - permissions:/app
     ports:
-      - 4000:4000
+      - 4001:4001
     command: air
     depends_on:
       - database
@@ -26,11 +26,12 @@ services:
     environment:
       POSTGRES_USER: genos
       POSTGRES_PASSWORD: genos
-      POSTGRES_DB: permissions
+      POSTGRES_MULTIPLE_DATABASES: permissions
     ports:
       - 5432:5432
     volumes:
       - ./data/postgresDb:/var/lib/postgresql/data
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
     depends_on:
       - redis
 
@@ -38,6 +39,6 @@ services:
     image: redis:latest
     restart: always
     volumes:
-      - ./data/redisDb:/data
+      - ./data:/data
     ports:
       - 6379:6379

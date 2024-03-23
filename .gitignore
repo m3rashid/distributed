@@ -1,3 +1,7 @@
 types/backup/*
 !types/backup/.gitkeep
 
+data/*
+!data/.gitkeep
+
+node_modules

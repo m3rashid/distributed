@@ -1,8 +1,8 @@
 {
-  "name": "@distributed/types",
+  "name": "distributed",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "private": true,
   "scripts": {},
   "author": "m3rashid <m3rashid.hussain@gmail.com>"
