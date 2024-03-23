@@ -11,17 +11,28 @@ const (
 	OWNER_NAME  RelationName = "owner"
 )
 
-func (rn RelationName) ToRelation() (Relation, error) {
+var ALL_RELATION_NAMES = []RelationName{READER_NAME, EDITOR_NAME, ADMIN_NAME, OWNER_NAME}
+
+func (rn RelationName) TSName() int {
 	switch rn {
 	case READER_NAME:
-		return READER, nil
+		return 1
 	case EDITOR_NAME:
-		return EDITOR, nil
+		return 2
 	case ADMIN_NAME:
-		return ADMIN, nil
+		return 4
 	case OWNER_NAME:
-		return OWNER, nil
+		return 8
 	default:
-		return 0, errors.New("invalid relation name")
+		return 0
 	}
+}
+
+func (rn RelationName) IsValid() error {
+	for _, relationName := range ALL_RELATION_NAMES {
+		if rn == relationName {
+			return nil
+		}
+	}
+	return errors.New("invalid relation name")
 }

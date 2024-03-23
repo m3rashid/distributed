@@ -1,0 +1,3 @@
+types/backup/*
+!types/backup/.gitkeep
+

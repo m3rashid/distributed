@@ -8,13 +8,24 @@ import (
 )
 
 func main() {
-	err := newConverter("authz.ts", authzModels.Group{}, authzModels.Permission{})
+	// authz converter
+	fileName, converter := newStructConverter("authz.ts", authzModels.Group{}, authzModels.Permission{})
+	// converter.AddEnum(authzModels.ALL_RELATION_NAMES) // enums cannot have numeric keys
+	converter.AddEnum(authzModels.ALL_RELATIONS)
+	convert(fileName, converter)
+
+	// .... other converters
+}
+
+func convert(fileName string, converter *typescriptify.TypeScriptify) {
+	err := converter.ConvertToFile(fileName)
 	if err != nil {
+		fmt.Println("error in converting", fileName)
 		fmt.Println(err)
 	}
 }
 
-func newConverter(fileName string, models ...interface{}) error {
+func newStructConverter(fileName string, models ...interface{}) (string, *typescriptify.TypeScriptify) {
 	converter := typescriptify.New().
 		WithConstructor(true).
 		WithInterface(true).
@@ -25,5 +36,5 @@ func newConverter(fileName string, models ...interface{}) error {
 		converter.Add(model)
 	}
 
-	return converter.ConvertToFile(fmt.Sprintf("../types/generated/%s", fileName))
+	return fmt.Sprintf("../types/generated/%s", fileName), converter
 }

@@ -13,18 +13,18 @@ const (
 
 var ALL_RELATIONS = []Relation{READER, EDITOR, ADMIN, OWNER}
 
-func (r Relation) ToRelationName() (string, error) {
+func (r Relation) TSName() string {
 	switch r {
 	case READER:
-		return "reader", nil
+		return "reader"
 	case EDITOR:
-		return "editor", nil
+		return "editor"
 	case ADMIN:
-		return "admin", nil
+		return "admin"
 	case OWNER:
-		return "owner", nil
+		return "owner"
 	default:
-		return "", errors.New("invalid relation")
+		return ""
 	}
 }
 
