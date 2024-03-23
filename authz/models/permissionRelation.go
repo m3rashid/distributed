@@ -13,7 +13,7 @@ const (
 
 var ALL_RELATIONS = []Relation{READER, EDITOR, ADMIN, OWNER}
 
-func (r Relation) TSName() string {
+func (r Relation) ToRelationName() string {
 	switch r {
 	case READER:
 		return "reader"
@@ -26,6 +26,10 @@ func (r Relation) TSName() string {
 	default:
 		return ""
 	}
+}
+
+func (r Relation) TSName() string {
+	return r.ToRelationName()
 }
 
 func (r Relation) IsValid() error {
