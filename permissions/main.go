@@ -1,12 +1,12 @@
 package main
 
 import (
-	"authz/service"
 	"fmt"
 	"log"
 	"net"
 	"os"
-	"proto/generated/authz"
+	"permissions/service"
+	"proto/generated/permissions"
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
@@ -29,10 +29,10 @@ func main() {
 	grpcServer := grpc.NewServer()
 
 	groupServer := service.GroupServer{}
-	authz.RegisterGroupServiceServer(grpcServer, &groupServer)
+	permissions.RegisterGroupServiceServer(grpcServer, &groupServer)
 
 	permissionServer := service.PermissionServer{}
-	authz.RegisterPermissionServiceServer(grpcServer, &permissionServer)
+	permissions.RegisterPermissionServiceServer(grpcServer, &permissionServer)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %s", err)

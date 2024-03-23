@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.12
-// source: proto/authz/group.proto
+// source: proto/permissions/group.proto
 
-package authz
+package permissions
 
 import (
 	context "context"
@@ -171,5 +171,5 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/authz/group.proto",
+	Metadata: "proto/permissions/group.proto",
 }

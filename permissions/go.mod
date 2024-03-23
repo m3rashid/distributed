@@ -1,4 +1,4 @@
-module authz
+module permissions
 
 go 1.22.0
 

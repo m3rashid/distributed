@@ -16,11 +16,11 @@ func main() {
 
 	defer conn.Close()
 
-	// groupClient := authz.NewGroupServiceClient(conn)
-	// permissionClient := authz.NewPermissionServiceClient(conn)
+	// groupClient := permissions.NewGroupServiceClient(conn)
+	// permissionClient := permissions.NewPermissionServiceClient(conn)
 
 	// // test requests
-	// res, err := groupClient.CreateGroup(context.Background(), &authz.CreateGroupRequest{
+	// res, err := groupClient.CreateGroup(context.Background(), &permissions.CreateGroupRequest{
 	// 	Name: "test",
 	// })
 	// if err != nil {

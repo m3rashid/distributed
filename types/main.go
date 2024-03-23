@@ -1,18 +1,18 @@
 package main
 
 import (
-	authzModels "authz/models"
 	"fmt"
+	permissionModels "permissions/models"
 
 	"github.com/tkrajina/typescriptify-golang-structs/typescriptify"
 )
 
 func main() {
-	// authz converter
-	fileName, converter := newStructConverter("authz.ts", authzModels.Group{}, authzModels.Permission{})
-	// converter.AddEnum(authzModels.ALL_RELATION_NAMES) // enums cannot have numeric keys
-	converter.AddEnum(authzModels.ALL_RELATIONS)
-	convert(fileName, converter)
+	// permissionModels permissionConverter
+	fileName, permissionConverter := newStructConverter("permissions.ts", permissionModels.Group{}, permissionModels.Permission{})
+	// converter.AddEnum(permissionModels.ALL_RELATION_NAMES) // enums cannot have numeric keys
+	permissionConverter.AddEnum(permissionModels.ALL_RELATIONS)
+	convert(fileName, permissionConverter)
 
 	// .... other converters
 }
