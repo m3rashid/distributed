@@ -11,8 +11,8 @@ message PaginationResponse {
 	uint32 total = 1;
 	uint32 page = 2;
 	uint32 limit = 3;
-	uint32 nextPage = 4;
-	uint32 prevPage = 5;
+	bool has_nextPage = 4;
+	bool has_prevPage = 5;
 }
 
 message Message {

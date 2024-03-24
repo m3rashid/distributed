@@ -11,11 +11,12 @@ message CreateGroupRequest {
 message Group {
 	string name = 1;
 	uint32 id = 2;
+	bool is_deleted = 3;
 }
 
 message GroupPaginationResponse {
 	PaginationResponse meta = 1;
-	Group data = 2;
+	repeated Group data = 2;
 }
 
 service GroupService {

@@ -10,6 +10,7 @@ export enum Relation {
 export interface Group {
   id: number;
   name: string;
+  is_deleted: boolean;
 }
 export interface Permission {
   id: number;
@@ -18,4 +19,5 @@ export interface Permission {
   relation: Relation;
   user_id: number;
   group_id: number;
+  is_deleted: boolean;
 }

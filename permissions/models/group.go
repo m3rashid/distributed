@@ -7,8 +7,9 @@ import (
 )
 
 type Group struct {
-	ID   SqlID  `json:"id" gorm:"column:id;primary_key;not null" validate:"required"`
-	Name string `json:"name" gorm:"column:name" validate:"required"`
+	ID        SqlID  `json:"id" gorm:"column:id;primary_key;not null" validate:""`
+	Name      string `json:"name" gorm:"column:name" validate:"required"`
+	IsDeleted bool   `json:"is_deleted" gorm:"column:is_deleted;default:false" validate:""`
 }
 
 const GROUP_MODEL_NAME = "groups"

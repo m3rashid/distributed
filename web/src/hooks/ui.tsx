@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { UiContext } from '../contexts/ui';
+import { UiContext } from '../contexts/ui.tsx';
 
 function useUi() {
   const context = useContext(UiContext);

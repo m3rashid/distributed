@@ -24,6 +24,7 @@ type Permission struct {
 	Relation         Relation `json:"relation" gorm:"column:relation;not null" validate:"required"`
 	UserID           SqlID    `json:"user_id" gorm:"column:user_id" validate:""`
 	GroupID          SqlID    `json:"group_id" gorm:"column:group_id" validate:""`
+	IsDeleted        bool     `json:"is_deleted" gorm:"column:is_deleted;default:false" validate:""`
 }
 
 const PERMISSION_MODEL_NAME = "permissions"
