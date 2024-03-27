@@ -1,11 +1,11 @@
 gen-proto:
 	protoc \
-	-I . --grpc-gateway_out ./proto/generated \
+	-I . --grpc-gateway_out ./generated \
   --grpc-gateway_opt paths=source_relative \
   --grpc-gateway_opt generate_unbound_methods=true \
 	--go_out=. \
 	--go-grpc_out=require_unimplemented_servers=false:proto \
-	proto/source/*.proto 
+	proto/*.proto 
 
 remove-gen-proto:
 	rm -rf proto/generated && \

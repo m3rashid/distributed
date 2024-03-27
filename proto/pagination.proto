@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./generated";
+option go_package = "./proto/generated";
 
 message PaginationRequest {
 	uint32 page = 1;
