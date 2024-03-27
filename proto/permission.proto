@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package = "./proto/generated";
+option go_package = "./generated";
 
-import "proto/pagination.proto";
+import "pagination.proto";
 
 message CreatePermissionRequest {
 	uint32 resource_id = 2;

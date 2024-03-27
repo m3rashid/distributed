@@ -1,1 +1,5 @@
-{}
+{
+  "protoc": {
+    "options": ["--proto_path=${workspaceRoot}/proto"]
+  }
+}
