@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "./generated";
 
 import "pagination.proto";
+import "annotations.proto";
 
 message CreatePermissionRequest {
 	uint32 resource_id = 2;
@@ -27,7 +28,11 @@ message CheckPermissionResponse {
 }
 
 service PermissionService {
-	rpc DeletePermission (ID) returns (Message) {}
+	rpc DeletePermission (ID) returns (Message) {
+		option (google.api.http) = {
+			delete: "/v1/permission/{id}"
+		};
+	}
 	rpc CreatePermission (CreatePermissionRequest) returns (Permission) {}
 	rpc CheckPermission (CreatePermissionRequest) returns (CheckPermissionResponse) {}
 }
