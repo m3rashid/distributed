@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "proto/permissions/pagination.proto";
+import "proto/source/pagination.proto";
 
-option go_package = "./generated/permissions";
+option go_package = "./generated";
 
 message CreateGroupRequest {
 	string name = 1;

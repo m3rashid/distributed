@@ -1,16 +1,24 @@
-.PHONY gen-proto:
+gen-proto:
 	protoc \
-	--go_out=proto \
+	-I . --grpc-gateway_out ./proto/generated \
+  --grpc-gateway_opt paths=source_relative \
+  --grpc-gateway_opt generate_unbound_methods=true \
+	--go_out=. \
 	--go-grpc_out=require_unimplemented_servers=false:proto \
-	proto/permissions/group.proto proto/permissions/pagination.proto proto/permissions/permission.proto
+	proto/source/*.proto 
 
-.PHONY remove-gen-proto:
-	rm -rf proto/generated/permissions
+remove-gen-proto:
+	rm -rf proto/generated && \
+	cd proto && \
+	mkdir generated && \
+	cd generated && \
+	touch .gitkeep && \
+	cd -
 
-.PHONY gen-types:
+gen-types:
 	cd types && go run main.go
 
-.PHONY remove-gen-types:
+remove-gen-types:
 	cd types && \
 	rm -rf generated && \
 	mkdir generated && \
@@ -22,3 +30,5 @@
 	cd backup && \
 	touch .gitkeep && \
 	cd -
+
+.PHONY: gen-proto remove-gen-proto gen-types remove-gen-types

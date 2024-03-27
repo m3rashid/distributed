@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./generated/permissions";
+option go_package = "./generated";
 
 message PaginationRequest {
 	uint32 page = 1;
