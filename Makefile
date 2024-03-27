@@ -4,6 +4,7 @@ gen-proto:
 	--grpc-gateway_out ./proto/generated/ \
   --grpc-gateway_opt paths=source_relative \
   --grpc-gateway_opt generate_unbound_methods=true \
+	--openapiv2_out ./proto/swagger/ \
 	--go_out=./proto/ \
 	--go-grpc_out=require_unimplemented_servers=false:proto \
 	proto/*.proto 
@@ -13,6 +14,11 @@ remove-gen-proto:
 	cd proto && \
 	mkdir generated && \
 	cd generated && \
+	touch .gitkeep && \
+	cd .. && \
+	rm -rf swagger && \
+	mkdir swagger && \
+	cd swagger && \
 	touch .gitkeep && \
 	cd -
 
