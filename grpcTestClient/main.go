@@ -1,7 +1,9 @@
 package main
 
 import (
+	"context"
 	"log"
+	"proto/generated/permissions"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -16,15 +18,15 @@ func main() {
 
 	defer conn.Close()
 
-	// groupClient := permissions.NewGroupServiceClient(conn)
+	groupClient := permissions.NewGroupServiceClient(conn)
 	// permissionClient := permissions.NewPermissionServiceClient(conn)
 
-	// // test requests
-	// res, err := groupClient.CreateGroup(context.Background(), &permissions.CreateGroupRequest{
-	// 	Name: "test",
-	// })
-	// if err != nil {
-	// 	log.Fatalf("Error when calling GetAllGroups: %v", err)
-	// }
-	// log.Printf("Response from GetAllGroups: %v", res)
+	res, err := groupClient.CreateGroup(context.Background(), &permissions.CreateGroupRequest{
+		Name: "test",
+	})
+
+	if err != nil {
+		log.Fatalf("Error when calling GetAllGroups: %v", err)
+	}
+	log.Printf("Response from GetAllGroups: %v", res)
 }
