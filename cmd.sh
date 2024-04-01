@@ -2,7 +2,7 @@
 
 cmd_line_args=("$@")
 
-declare -a allowed_cmds=("gen" "clean")
+declare -a allowed_cmds=("gen" "clean" "init")
 declare -a folders_to_clean=("node_modules" "build" "dist" ".swc" ".gradle")
 
 for i in "${cmd_line_args[@]}"
@@ -25,8 +25,7 @@ function contains() {
 	return 1
 }
 
-
-if contains "$@" "clean"; then
+function clean() {
 	make remove-gen-proto
 	make remove-gen-types
 
@@ -34,9 +33,21 @@ if contains "$@" "clean"; then
 	do
 		find . -name "$i" -type d -prune -exec rm -rf '{}' +
 	done
+}
+
+function generate () {
+	make gen-proto
+	make gen-types
+}
+
+if contains "$@" "clean"; then
+	clean
 fi
 
 if contains "$@" "gen"; then
-	make gen-proto
-	make gen-types
+	generate
+fi
+
+if contains "$@ " "init"; then
+	generate
 fi

@@ -14,6 +14,5 @@ go install \
 ### Getting Started
 
 ```sh
-make gen-proto
-make gen-types
+	./cmd.sh init
 ```
