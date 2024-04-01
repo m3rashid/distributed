@@ -5,18 +5,6 @@ cmd_line_args=("$@")
 declare -a allowed_cmds=("gen" "clean" "init" "regen")
 declare -a folders_to_clean=("node_modules" "build" "dist" ".swc" ".gradle")
 
-# function to check if an element is in an array
-function contains() {
-	local n=$#
-	local value=${!n}
-	for ((i=1; i < $#; i++)) {
-		if [ "${!i}" == "${value}" ]; then
-			return 0
-		fi
-	}
-	return 1
-}
-
 # if no command is passed, error
 if [ $# -eq 0 ]; then
 	echo "No command passed"
