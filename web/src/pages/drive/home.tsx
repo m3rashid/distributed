@@ -1,5 +1,9 @@
 function DriveHome() {
-  return <div></div>;
+  return (
+    <>
+      <div>Drive Home</div>
+    </>
+  );
 }
 
 export default DriveHome;

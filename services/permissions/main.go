@@ -1,16 +1,21 @@
 package main
 
 import (
+	"context"
+	"flag"
 	"fmt"
 	"io"
 	"net"
+	"net/http"
 	"os"
 	"permissions/models"
 	"permissions/rpcs"
 	"permissions/utils"
 	"proto/generated"
 
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
 )
 
@@ -46,4 +51,27 @@ func main() {
 	}
 
 	log.Infoln("Server is running")
+
+	if err := run(); err != nil {
+		grpclog.Fatal(err)
+	}
+}
+
+func run() error {
+	flag.Parse()
+	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	mux := runtime.NewServeMux()
+	opts := []grpc.DialOption{
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	}
+	err := generated.RegisterGroupServiceHandlerFromEndpoint(ctx, mux, "/group/", opts)
+	if err != nil {
+		return err
+	}
+
+	// Start HTTP server (and proxy calls to gRPC server endpoint)
+	return http.ListenAndServe(":8081", mux)
 }

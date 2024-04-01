@@ -5,5 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {},
-  "author": "m3rashid <m3rashid.hussain@gmail.com>"
+  "author": "m3rashid <m3rashid.hussain@gmail.com>",
+  "workspaces": [
+    "types",
+    "web"
+  ]
 }

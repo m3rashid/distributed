@@ -16,7 +16,71 @@
     "application/json"
   ],
   "paths": {
-    "/v1/permission/{id}": {
+    "/check": {
+      "post": {
+        "operationId": "PermissionService_CheckPermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CheckPermissionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePermissionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PermissionService"
+        ]
+      }
+    },
+    "/create": {
+      "post": {
+        "operationId": "PermissionService_CreatePermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePermissionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PermissionService"
+        ]
+      }
+    },
+    "/delete/{id}": {
       "delete": {
         "operationId": "PermissionService_DeletePermission",
         "responses": {
@@ -54,6 +118,31 @@
       "properties": {
         "res": {
           "type": "boolean"
+        }
+      }
+    },
+    "CreatePermissionRequest": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "resourceParentId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "relation": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "groupId": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

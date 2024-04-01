@@ -1,8 +1,3 @@
-import {
-  webDarkTheme,
-  webLightTheme,
-  FluentProvider,
-} from '@fluentui/react-components';
 import { PropsWithChildren, createContext, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
@@ -21,9 +16,7 @@ function UiContextProvider({ children }: PropsWithChildren) {
 
   return (
     <UiContext.Provider value={{ theme, setTheme }}>
-      <FluentProvider theme={theme === 'light' ? webLightTheme : webDarkTheme}>
-        {children}
-      </FluentProvider>
+      {children}
     </UiContext.Provider>
   );
 }
