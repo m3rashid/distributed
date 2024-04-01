@@ -2,7 +2,7 @@
 
 cmd_line_args=("$@")
 
-declare -a allowed_cmds=("gen" "clean" "init")
+declare -a allowed_cmds=("gen" "clean" "init" "regen")
 declare -a folders_to_clean=("node_modules" "build" "dist" ".swc" ".gradle")
 
 # function to check if an element is in an array
@@ -65,14 +65,9 @@ function generate () {
 	make gen-types
 }
 
-if contains $cmd_line_args "clean"; then
-	clean
-fi
-
-if contains $cmd_line_args "gen"; then
-	generate
-fi
-
-if contains $cmd_line_args "init"; then
-	generate
-fi
+case $1 in 
+	"clean") clean;;
+	"gen") generate;;
+	"init") generate;;
+	"regen") clean; generate;;
+esac

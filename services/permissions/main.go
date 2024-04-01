@@ -8,7 +8,6 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"permissions/models"
 	"permissions/rpcs"
 	"permissions/utils"
 	"proto/generated"
@@ -29,8 +28,8 @@ func main() {
 		panic(err)
 	}
 
-	db := utils.GetDB()
-	db.AutoMigrate(&models.Group{}, &models.Permission{})
+	// db := utils.GetDB()
+	// db.AutoMigrate(&models.Group{}, &models.Permission{})
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
 	if err != nil {
@@ -67,7 +66,7 @@ func run() error {
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
-	err := generated.RegisterGroupServiceHandlerFromEndpoint(ctx, mux, "/group/", opts)
+	err := generated.RegisterGroupServiceHandlerFromEndpoint(ctx, mux, "/group", opts)
 	if err != nil {
 		return err
 	}
