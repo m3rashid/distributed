@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"io"
 	"net"
@@ -16,6 +15,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -31,9 +31,23 @@ func main() {
 	// db := utils.GetDB()
 	// db.AutoMigrate(&models.Group{}, &models.Permission{})
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
+	go func() {
+		if err := runHttpServer(); err != nil {
+			grpclog.Fatal(err)
+		}
+	}()
+
+	if err := runGrpcServer(); err != nil {
+		grpclog.Fatal(err)
+	}
+}
+
+func runGrpcServer() error {
+	grpcPort := fmt.Sprintf(":%s", os.Getenv("GRPC_SERVER_PORT"))
+	lis, err := net.Listen("tcp", grpcPort)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		grpclog.Infoln("failed to listen: %v", err)
+		return err
 	}
 
 	grpcServer := grpc.NewServer()
@@ -44,33 +58,45 @@ func main() {
 	permissionServer := rpcs.PermissionServer{}
 	generated.RegisterPermissionServiceServer(grpcServer, &permissionServer)
 
-	log.Infoln("grpc server running on port", os.Getenv("SERVER_PORT"))
+	// Enable reflection to allow clients to query the server's services
+	reflection.Register(grpcServer)
+
+	grpclog.Infoln("grpc server running on port", grpcPort)
 	if err := grpcServer.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %s", err)
+		grpclog.Infoln("failed to serve: %s", err)
+		return err
 	}
-
-	log.Infoln("Server is running")
-
-	if err := run(); err != nil {
-		grpclog.Fatal(err)
-	}
+	return nil
 }
 
-func run() error {
-	flag.Parse()
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	defer cancel()
+func runHttpServer() error {
+	httpPort := fmt.Sprintf(":%s", os.Getenv("HTTP_SERVER_PORT"))
+	grpcPort := fmt.Sprintf(":%s", os.Getenv("GRPC_SERVER_PORT"))
 
+	ctx := context.Background()
 	mux := runtime.NewServeMux()
-	opts := []grpc.DialOption{
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-	}
-	err := generated.RegisterGroupServiceHandlerFromEndpoint(ctx, mux, fmt.Sprintf("localhost:%s", os.Getenv("SERVER_PORT")), opts)
+
+	conn, err := grpc.DialContext(ctx, "localhost"+grpcPort, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
+		grpclog.Infoln("failed to dial server: %v", err)
 		return err
 	}
 
-	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	return http.ListenAndServe(":8081", mux)
+	if err := generated.RegisterGroupServiceHandler(ctx, mux, conn); err != nil {
+		grpclog.Infoln("failed to register group handler: %v", err)
+		return err
+	}
+
+	if err := generated.RegisterPermissionServiceHandler(ctx, mux, conn); err != nil {
+		grpclog.Infoln("failed to register permissions handler: %v", err)
+		return err
+	}
+
+	grpclog.Infoln("http server running on port", httpPort)
+	if err := http.ListenAndServe(httpPort, mux); err != nil {
+		grpclog.Infoln("failed to serve: %s", err)
+		return err
+	}
+
+	return nil
 }
