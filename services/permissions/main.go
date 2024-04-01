@@ -66,7 +66,7 @@ func run() error {
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
-	err := generated.RegisterGroupServiceHandlerFromEndpoint(ctx, mux, "/group", opts)
+	err := generated.RegisterGroupServiceHandlerFromEndpoint(ctx, mux, fmt.Sprintf("localhost:%s", os.Getenv("SERVER_PORT")), opts)
 	if err != nil {
 		return err
 	}

@@ -23,21 +23,21 @@ message GroupPaginationResponse {
 service GroupService {
 	rpc DeleteGroup (ID) returns (Message) {
 		option (google.api.http) = {
-      post: "/delete/{id}"
+      post: "/groups/delete/{id}"
       body: "*"
     };
 	}
 
 	rpc CreateGroup (CreateGroupRequest) returns (Group) {
 		option (google.api.http) = {
-			post: "/create"
+			post: "/groups/create"
 			body: "*"
 		};
 	}
 
 	rpc GetAllGroups (PaginationRequest) returns (GroupPaginationResponse) {
 		option (google.api.http) = {
-			get: "/all"
+			get: "/groups/all"
 		};
 	}
 }

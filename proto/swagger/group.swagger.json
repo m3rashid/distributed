@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/all": {
+    "/groups/all": {
       "get": {
         "operationId": "GroupService_GetAllGroups",
         "responses": {
@@ -54,7 +54,7 @@
         ]
       }
     },
-    "/create": {
+    "/groups/create": {
       "post": {
         "operationId": "GroupService_CreateGroup",
         "responses": {
@@ -86,7 +86,7 @@
         ]
       }
     },
-    "/delete/{id}": {
+    "/groups/delete/{id}": {
       "post": {
         "operationId": "GroupService_DeleteGroup",
         "responses": {

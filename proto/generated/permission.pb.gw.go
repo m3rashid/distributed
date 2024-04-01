@@ -149,7 +149,7 @@ func RegisterPermissionServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.PermissionService/DeletePermission", runtime.WithHTTPPathPattern("/delete/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.PermissionService/DeletePermission", runtime.WithHTTPPathPattern("/permissions/delete/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -174,7 +174,7 @@ func RegisterPermissionServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.PermissionService/CreatePermission", runtime.WithHTTPPathPattern("/create"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.PermissionService/CreatePermission", runtime.WithHTTPPathPattern("/permissions/create"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -199,7 +199,7 @@ func RegisterPermissionServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.PermissionService/CheckPermission", runtime.WithHTTPPathPattern("/check"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.PermissionService/CheckPermission", runtime.WithHTTPPathPattern("/permissions/check"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -263,7 +263,7 @@ func RegisterPermissionServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.PermissionService/DeletePermission", runtime.WithHTTPPathPattern("/delete/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.PermissionService/DeletePermission", runtime.WithHTTPPathPattern("/permissions/delete/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -285,7 +285,7 @@ func RegisterPermissionServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.PermissionService/CreatePermission", runtime.WithHTTPPathPattern("/create"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.PermissionService/CreatePermission", runtime.WithHTTPPathPattern("/permissions/create"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -307,7 +307,7 @@ func RegisterPermissionServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.PermissionService/CheckPermission", runtime.WithHTTPPathPattern("/check"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.PermissionService/CheckPermission", runtime.WithHTTPPathPattern("/permissions/check"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -327,11 +327,11 @@ func RegisterPermissionServiceHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_PermissionService_DeletePermission_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"delete", "id"}, ""))
+	pattern_PermissionService_DeletePermission_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"permissions", "delete", "id"}, ""))
 
-	pattern_PermissionService_CreatePermission_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"create"}, ""))
+	pattern_PermissionService_CreatePermission_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"permissions", "create"}, ""))
 
-	pattern_PermissionService_CheckPermission_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"check"}, ""))
+	pattern_PermissionService_CheckPermission_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"permissions", "check"}, ""))
 )
 
 var (

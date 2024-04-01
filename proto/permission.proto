@@ -30,20 +30,20 @@ message CheckPermissionResponse {
 service PermissionService {
 	rpc DeletePermission (ID) returns (Message) {
 		option (google.api.http) = {
-			delete: "/delete/{id}"
+			delete: "/permissions/delete/{id}"
 		};
 	}
 
 	rpc CreatePermission (CreatePermissionRequest) returns (Permission) {
 		option (google.api.http) = {
-			post: "/create"
+			post: "/permissions/create"
 			body: "*"
 		};
 	}
 
 	rpc CheckPermission (CreatePermissionRequest) returns (CheckPermissionResponse) {
 		option (google.api.http) = {
-			post: "/check"
+			post: "/permissions/check"
 			body: "*"
 		};
 	}

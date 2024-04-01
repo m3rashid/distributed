@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/check": {
+    "/permissions/check": {
       "post": {
         "operationId": "PermissionService_CheckPermission",
         "responses": {
@@ -48,7 +48,7 @@
         ]
       }
     },
-    "/create": {
+    "/permissions/create": {
       "post": {
         "operationId": "PermissionService_CreatePermission",
         "responses": {
@@ -80,7 +80,7 @@
         ]
       }
     },
-    "/delete/{id}": {
+    "/permissions/delete/{id}": {
       "delete": {
         "operationId": "PermissionService_DeletePermission",
         "responses": {
