@@ -12,6 +12,9 @@ services:
     restart: always
     env_file:
       - services/permissions/.env
+    volumes:
+      - ./services/permissions/:/app/services/permissions
+      - ./proto/:/app/proto
     ports:
       - 4001:4001
       - 4000:4000

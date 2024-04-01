@@ -4,10 +4,22 @@ RUN go install github.com/cosmtrek/air@latest
 
 WORKDIR /app
 
-COPY services/permissions/go.mod .
-COPY services/permissions/go.sum .
-RUN go mod download
+COPY proto/ ./proto
+RUN cd /app/proto && go mod download && cd ..
 
-COPY . .
+COPY types/ ./types
+COPY utils/ ./utils
+RUN cd /app/utils && go mod download && cd ..
 
-CMD ["air"]
+COPY services/permissions/go.mod ./services/permissions/
+COPY services/permissions/go.sum ./services/permissions/
+
+RUN cd /app/services/permissions && go mod download && cd ..
+
+COPY go.work .
+COPY go.mod .
+
+COPY services/permissions/ ./services/permissions/
+
+
+WORKDIR /app/services/permissions

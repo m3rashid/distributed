@@ -12,4 +12,4 @@ manifest.json
 rsconnect/
 .Rproj.user
 data
-
+*.Dockerfile

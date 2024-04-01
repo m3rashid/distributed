@@ -38,7 +38,10 @@ remove-gen-types:
 	touch .gitkeep && \
 	cd -
 
-dev:
+up:
 	docker compose -f ./dev.docker-compose.yml up
 
-.PHONY: gen-proto remove-gen-proto gen-types remove-gen-types dev
+down:
+	docker compose -f ./dev.docker-compose.yml down
+
+.PHONY: gen-proto remove-gen-proto gen-types remove-gen-types up down
