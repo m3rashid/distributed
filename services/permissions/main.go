@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"permissions/models"
 	"permissions/rpcs"
 	"permissions/utils"
 	"proto/generated"
@@ -28,8 +29,8 @@ func main() {
 		panic(err)
 	}
 
-	// db := utils.GetDB()
-	// db.AutoMigrate(&models.Group{}, &models.Permission{})
+	db := utils.GetDB()
+	db.AutoMigrate(&models.Group{}, &models.Permission{})
 
 	go func() {
 		if err := runHttpServer(); err != nil {

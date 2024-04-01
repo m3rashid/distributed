@@ -8,14 +8,13 @@ services:
   permissions:
     build:
       context: .
-      dockerfile: permissions/dev.Dockerfile
+      dockerfile: services/permissions/dev.Dockerfile
     restart: always
     env_file:
-      - permissions/.env
-    volumes:
-      - permissions:/app
+      - services/permissions/.env
     ports:
       - 4001:4001
+      - 4000:4000
     command: air
     depends_on:
       - database
