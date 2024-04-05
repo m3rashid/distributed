@@ -5,6 +5,7 @@ gen-proto:
   --grpc-gateway_opt paths=source_relative \
   --grpc-gateway_opt generate_unbound_methods=true \
 	--openapiv2_out ./proto/swagger/ \
+	--openapiv2_opt=allow_merge=true,merge_file_name=doc \
 	--go_out=./proto/ \
 	--go-grpc_out=require_unimplemented_servers=false:proto \
 	proto/*.proto 
