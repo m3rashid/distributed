@@ -1,6 +1,6 @@
 ### Distributed
 
-Just my attempt in learning distributed systems
+Just my attempt in learning distributed systems (with neovim btw)
 
 ```go
 // install the local go packages for gRPC gateway
@@ -14,5 +14,5 @@ go install \
 ### Getting Started
 
 ```sh
-	./cmd.sh init
+./cmd.sh init
 ```
