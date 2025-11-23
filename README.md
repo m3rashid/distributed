@@ -1,6 +1,6 @@
 ### Distributed
 
-Just my attempt in learning distributed systems (with neovim btw)
+Just my attempt in learning distributed systems
 
 ```go
 // install the local go packages for gRPC gateway
